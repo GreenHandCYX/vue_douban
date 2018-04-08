@@ -320,7 +320,6 @@ export default {
               margin-top: 30px
               padding-bottom: 20px
        .works
-          
           padding-bottom: 20px
           font-size: $font-size-medium
           white-space: nowrap
@@ -341,6 +340,13 @@ export default {
                  color: $color-text-f
                  padding: 8px 0 5px 0
                  no-wrap()
+       .allWorks
+          padding: 20px 0
+          font-size: $font-size-medium
+          i
+            display: inline-block
+            vertical-align: middle
+            font-size: $font-size-large-x
 </style>
 
 
