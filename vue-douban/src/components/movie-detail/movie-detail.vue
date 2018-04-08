@@ -24,6 +24,22 @@
           <img v-lazy="replaceUrl(movieDetail.images.large)" :data-origin="movieDetail.images.large">
         </div>
         <movie-info :movieDetail="movieDetail" @selectCelebrity="selectCelebrity"></movie-info>
+        <div class="switch">
+          <switches :switches="switches" :currentIndex="currentIndex" @switch="switchItem"></switches>
+        </div>
+        <movie-comment
+        v-show="currentIndex===0"
+        :comments="movieDetail.popular_comments"
+        :commentNum="movieDetail.comments_count"
+        @needAllComments="needAllComments"
+        ></movie-comment>
+        <movie-review
+        v-show="currentIndex===1"
+        :reviews="movieDetail.popular_reviews.slice(0,5)"
+        :reviewNum="movieDetail.reviews_count"
+        @selectView="selectReview"
+        @neelAllReviews="needAllReviews"
+        ></movie-review>
       </div>
     </div>
     <loadmore :fullScreen="fullScreen" v-show="!movieDetail.images"></loadmore>
@@ -36,6 +52,9 @@ import {getMovieDetail } from 'api/movie-detail'
 import Scroll from 'base/scroll/scroll'
 import Loadmore from 'base/loadmore/loadmore'
 import MovieInfo from 'components/movie-info/movie-info'
+import Switches from 'base/switches/switches'
+import MovieComment from 'components/movie-comment/movie-comment'
+import MovieReview from 'components/movie-review/movie-review'
 export default {
   name:'movieDetail',//用于避免keep-alive缓存
   created(){
@@ -50,6 +69,11 @@ export default {
       changeFix:true,//更改fixed的内容
       fullScreen:true,//加载动画全屏
       imgHeight:-1,//电影封面图片高度
+      currentIndex:0,//用于表示短评和影评模块的索引，默认显示短评
+      switches:[
+        {name:'短评'},
+        {name:'影评'}
+      ],
     }
   },
   computed:{
@@ -58,6 +82,20 @@ export default {
     ])
   },
   methods:{
+    needAllReviews(){
+      //查看所有影评
+    },
+    selectReview(id){
+      //选择某一条评论进入评论详情
+    },
+    needAllComments(){
+      //查看全部短评
+    },
+    switchItem(index){
+      //切换短评与影评模块
+      this.currentIndex = index
+      console.log(index)
+    },
     selectCelebrity(id){
       //选取影人，存在vuex中
       this.setCelebrity(id)
@@ -129,7 +167,10 @@ export default {
   components:{
     Scroll,
     Loadmore,
-    MovieInfo
+    MovieInfo,
+    Switches,
+    MovieComment,
+    MovieReview
   }
 }
 </script>

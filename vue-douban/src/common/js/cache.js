@@ -6,9 +6,11 @@ const USER_ID = 'cyx';//当前用户
 const WATCHED_KEY = '__watched__';//看过的电影
 const WANTED_KEY = '__wanted__';//想看的电影
 const CELEBRITY_KEY = '__celebrity__';//收藏的影人
+const COMMENT_KEY = '__comment__';//点赞评论
 const WATCHED_MAX_LENGTH = 300;//看过电影的长度限制
 const WANTED_MAX_LENGTH = 300;//想看电影的长度限制
 const CELEBRITY_MAX_LENGTH =300;//收藏的影人的长度限制
+const COMMENT_MAX_LENGTH = 300;//点赞评论的长度限制
 /*
  *想看的电影
  */
@@ -101,4 +103,31 @@ export function saveCelebrity(celebrity){
 //从缓存中读取
 export function loadCelebrity(){
   return loadFromLocal(USER_ID,CELEBRITY_KEY,[])
+}
+
+/*
+*点赞评论
+*/
+//点赞或取消点赞
+export function saveComment(id){
+  const maxLen = COMMENT_MAX_LENGTH;
+  let comments = loadFromLocal(USER_ID,COMMENT_KEY,[]);
+  const index = comments.findIndex(item=>{
+    return item === id
+  })
+  if(index === -1){
+    comments.push(id);
+    if(maxLen && comments.length > maxLen){
+      comments.shift()
+    }
+  }else{
+    comments.splice(index,1)
+  }
+  saveToLocal(USER_ID,COMMENT_KEY,comments);
+  return comments
+}
+
+//查看评论点赞状态
+export function loadComment(){
+  return loadFromLocal(USER_ID,COMMENT_KEY,[])
 }

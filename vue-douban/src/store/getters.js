@@ -8,3 +8,5 @@ export const watchedMovies = state => state.watchedMovies;
 export const currentCelebrityId = state => state.currentCelebrityId;
 
 export const collectedCelebrities = state => state.collectedCelebrities;
+
+export const favoriteComments = state => state.favoriteComments;

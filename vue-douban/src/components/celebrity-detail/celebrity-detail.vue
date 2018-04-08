@@ -25,8 +25,8 @@
           <div class="brief">
             <div class="title">个人简介</div>
             <p class="text" @click="showInfo">
-              {{celebrityDetail.summary}}
-              <span class="more"><i class="icon-keyboard_arrow_right"></i></span>
+              {{celebrityDetail.summary || '暂无相关信息'}}
+              <span class="more" v-if="celebrityDetail.summary"><i class="icon-keyboard_arrow_right"></i></span>
             </p>
           </div>
           <h2 class="works-title">代表作品</h2>

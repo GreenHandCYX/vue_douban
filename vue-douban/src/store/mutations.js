@@ -18,6 +18,9 @@ const mutations = {
   },
   [types.SET_COLLECT_CELEBRITY](state,celebrities){
     state.collectedCelebrities = celebrities
+  },
+  [types.SET_FAVORITE_COMMENTS](state,comments){
+    state.favoriteComments = comments
   }
 }
 export default mutations;

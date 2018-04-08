@@ -10,3 +10,5 @@ export const SET_WANTED_MOVIES = 'SET_WANTED_MOVIES';//存储或删除想看的�
 export const SET_CELEBRITY_ID = 'SET_CELEBRITY_ID';//存储当前选中的影人id
 
 export const SET_COLLECT_CELEBRITY = 'SET_COLLECT_CELEBRITY';//收藏或取消收藏影人
+
+export const SET_FAVORITE_COMMENTS = 'SET_FAVORITE_COMMENTS';//点赞评论或取消点赞
