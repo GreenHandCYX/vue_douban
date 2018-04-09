@@ -12,3 +12,7 @@ export const SET_CELEBRITY_ID = 'SET_CELEBRITY_ID';//存储当前选中的影人
 export const SET_COLLECT_CELEBRITY = 'SET_COLLECT_CELEBRITY';//收藏或取消收藏影人
 
 export const SET_FAVORITE_COMMENTS = 'SET_FAVORITE_COMMENTS';//点赞评论或取消点赞
+
+export const SET_DISCUSSION_TYPE = 'SET_DISCUSSION_TYPE';//设置当前评论类型
+
+export const SET_REVIEW_ID = 'SET_REVIEW_ID';//设置当前选择的影评

@@ -37,13 +37,14 @@
         v-show="currentIndex===1"
         :reviews="movieDetail.popular_reviews.slice(0,5)"
         :reviewNum="movieDetail.reviews_count"
-        @selectView="selectReview"
+        @selectReview="selectReview"
         @neelAllReviews="needAllReviews"
         ></movie-review>
       </div>
     </div>
     <loadmore :fullScreen="fullScreen" v-show="!movieDetail.images"></loadmore>
     </scroll>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -83,18 +84,35 @@ export default {
   },
   methods:{
     needAllReviews(){
+      this.setDisscussType('reviews')
       //查看所有影评
+      this.$router.push({
+        path:`/movie/${this.movieDetail.id}/reviews`
+      })
     },
     selectReview(id){
       //选择某一条评论进入评论详情
+      this.setReview(id);
+      this.$router.push({
+        path:`/movie/${this.movieDetail.id}/review/${id}`
+      })
     },
     needAllComments(){
+      //因为短评和影评用的是同一路由，所以需要存储在vuex中用以区分评论类型
+      this.setDisscussType('comments')
       //查看全部短评
+      this.$router.push({
+        path:`/movie/${this.movieDetail.id}/comments`
+      })
     },
     switchItem(index){
       //切换短评与影评模块
       this.currentIndex = index
       console.log(index)
+      //需要重绘scroll
+      this.$nextTick(()=>{
+        this.$refs.scroll.refresh()
+      })
     },
     selectCelebrity(id){
       //选取影人，存在vuex中
@@ -161,7 +179,10 @@ export default {
       }
     },
     ...mapMutations({
-      setCelebrity:'SET_CELEBRITY_ID'//将当前选中的演员信息存入vuex
+      setCelebrity:'SET_CELEBRITY_ID',//将当前选中的演员信息存入vuex
+      setDisscussType:'SET_DISCUSSION_TYPE',//存储当前评论类型
+      setReview:'SET_REVIEW_ID',//保存选中的评论
+
     })
   },
   components:{

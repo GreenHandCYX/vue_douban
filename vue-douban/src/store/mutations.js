@@ -21,6 +21,12 @@ const mutations = {
   },
   [types.SET_FAVORITE_COMMENTS](state,comments){
     state.favoriteComments = comments
+  },
+  [types.SET_DISCUSSION_TYPE](state,type){
+    state.currentDiscussionType = type
+  },
+  [types.SET_REVIEW_ID](state,id){
+    state.currentReviewId = id
   }
 }
 export default mutations;

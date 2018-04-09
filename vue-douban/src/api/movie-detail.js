@@ -13,3 +13,17 @@ export function getMovieDetail(id){
     console.log(err)
   })
 }
+
+
+//获取某一影评的详细信息
+export function getMovieReview(id){
+  const url = `/v2/movie/review/${id}`;
+  const data = Object.assign({},commonParams);
+  return axios.get(url,{
+    params:data
+  }).then(res=>{
+    return Promise.resolve(res.data);
+  }).catch(err=>{
+    console.log(err)
+  })
+}

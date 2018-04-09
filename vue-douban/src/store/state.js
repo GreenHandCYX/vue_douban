@@ -7,6 +7,8 @@ const state = {
   wantedMovies:loadWantedMovie(),//想看的电影
   currentCelebrityId:0,//当前选中的影人
   collectedCelebrities:loadCelebrity(),//收藏的影人
-  favoriteComments:loadComment()//点赞的评论
+  favoriteComments:loadComment(),//点赞的评论
+  currentDiscussionType:'',//当前评论类型
+  currentReviewId:0,//当前选择的影评
 }
 export default state;
