@@ -10,6 +10,7 @@ const CelebrityDetail = resolve => require(['components/celebrity-detail/celebri
 const CelebrityWorks = resolve => require(['components/celebrity-works/celebrity-works'],resolve)
 const AllDiscussion =resolve => require(['components/all-discussion/all-discussion'],resolve)
 const ReviewDetail = resolve => require(['components/review-detail/review-detail'],resolve)
+const Search = resolve => require(['components/search/search'],resolve)
 //整体文件加载
 //let getCommonComponent = componentName => resolve => require(['components/CommonComponents'],components=> resolve(components[componentName]))
 
@@ -18,9 +19,13 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
+  		 {
       path: '/',
       redirect: '/movie-show'
+    },
+    {
+      path: '/search',
+      component:Search
     },
     {
       path:'/movie-show',

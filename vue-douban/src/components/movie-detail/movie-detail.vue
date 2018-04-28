@@ -38,7 +38,7 @@
         :reviews="movieDetail.popular_reviews.slice(0,5)"
         :reviewNum="movieDetail.reviews_count"
         @selectReview="selectReview"
-        @neelAllReviews="needAllReviews"
+        @needAllReviews="needAllReviews"
         ></movie-review>
       </div>
     </div>

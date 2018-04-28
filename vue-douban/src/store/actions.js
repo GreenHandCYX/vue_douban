@@ -2,7 +2,7 @@
 import * as types from './mutation-types'
 
 //处理缓存的事件
-import {saveWatchedMovie,saveWantedMovie,saveCelebrity,saveComment} from '../common/js/cache'
+import {saveWatchedMovie,saveWantedMovie,saveCelebrity,saveComment,saveSearch,deleteSearch,clearSearch} from '../common/js/cache'
 
 //存储或删除想看的电影
 export const markWantedMovie = ({commit},movie) => commit(types.SET_WANTED_MOVIES,saveWantedMovie(movie))
@@ -15,3 +15,12 @@ export const markCelebrity = ({commit},celebrity) => commit(types.SET_COLLECT_CE
 
 //点赞或取消点赞
 export const markComment = ({commit},id) => commit(types.SET_FAVORITE_COMMENTS,saveComment(id))
+
+//保存搜索历史
+export const saveSearchHistory = ({commit},query)=>commit(types.SET_SEARCH_HISTORY,saveSearch(query))
+
+//删除某条历史记录
+export const deleteSearchHistory = ({commit},query)=> commit(types.SET_SEARCH_HISTORY,deleteSearch(query))
+
+//清空所有历史记录
+export const clearSearchHistory = ({commit}) => commit(types.SET_SEARCH_HISTORY,clearSearch())

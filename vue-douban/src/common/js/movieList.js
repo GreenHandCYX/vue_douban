@@ -49,6 +49,24 @@
     })
     return ret;
   }
+  
+// 创建包含电影类的适合搜索结果的电影信息列表
+export function createSearchList(movieList) {
+  let ret = [];
+  movieList.forEach((movie, index) => {
+    ret.push(new Movie({
+      id: movie.id,
+      title: movie.title,
+      director: filterDirector(movie.directors),
+      casts: filterCasts(movie.casts),
+      rating: movie.rating.average,
+      image: movie.images.small,
+      pubdates: movie.pubdates,
+      subtype: movie.subtype
+    }));
+  });
+  return ret;
+};
 
   //处理导演信息，只获取主导演
   function filterDirector(directors){

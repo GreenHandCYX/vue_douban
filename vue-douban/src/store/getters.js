@@ -14,3 +14,5 @@ export const favoriteComments = state => state.favoriteComments;
 export const currentDiscussionType = state => state.currentDiscussionType;
 
 export const currentReviewId = state => state.currentReviewId;
+
+export const searchHistory = state => state.searchHistory;

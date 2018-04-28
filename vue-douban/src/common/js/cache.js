@@ -7,10 +7,12 @@ const WATCHED_KEY = '__watched__';//看过的电影
 const WANTED_KEY = '__wanted__';//想看的电影
 const CELEBRITY_KEY = '__celebrity__';//收藏的影人
 const COMMENT_KEY = '__comment__';//点赞评论
+const SEARCH_KEY = '__search__';//搜索历史
 const WATCHED_MAX_LENGTH = 300;//看过电影的长度限制
 const WANTED_MAX_LENGTH = 300;//想看电影的长度限制
 const CELEBRITY_MAX_LENGTH =300;//收藏的影人的长度限制
 const COMMENT_MAX_LENGTH = 300;//点赞评论的长度限制
+const SEARCH_MAX_LENGTH = 20;//搜索历史长度限制
 /*
  *想看的电影
  */
@@ -130,4 +132,68 @@ export function saveComment(id){
 //查看评论点赞状态
 export function loadComment(){
   return loadFromLocal(USER_ID,COMMENT_KEY,[])
+}
+
+/**
+ * 搜索历史
+* */
+
+//保存搜索结果
+export function saveSearch(query){
+	let searches = loadFromLocal(USER_ID,SEARCH_KEY,[]);//获取不到返回空数组
+	insertArray(searches,query,item => {
+		return item === query
+	},SEARCH_MAX_LENGTH);
+	saveToLocal(USER_ID,SEARCH_KEY,searches);
+	return searches;
+}
+//从缓存中读取
+export function loadSearch() {
+  return loadFromLocal(USER_ID, SEARCH_KEY, []);
+}
+
+// 从缓存中删除
+export function deleteSearch(query) {
+  let searches = loadFromLocal(USER_ID, SEARCH_KEY, []); // 获取不到返回空数组
+  deleteFromArray(searches, (item) => {
+    return item === query;
+  });
+  saveToLocal(USER_ID, SEARCH_KEY, searches); // 存入缓存
+  return searches;
+}
+// 删除全部缓存
+export function clearSearch() {
+  saveToLocal(USER_ID, SEARCH_KEY, []); // 存入缓存;
+  return [];
+ }
+
+
+
+/*
+ * 通用方法
+ */
+
+//将信息插入缓存数组
+function insertArray(arr,val,compare,maxLen){
+	//查找缓存数组中是否包含添加的数据，返回索引
+	const index = arr.findIndex(compare)
+	if(index===0){
+		return
+	}
+	if(index>0){
+		arr.splice(index,1)
+	} 
+	// 将新数据添加到最前面
+  arr.unshift(val);
+  // 超过最大长度时移除末尾数据
+  if (maxLen && arr.length > maxLen) {
+    arr.pop();
+  }//
+}
+//将信息从缓存数组中删除
+function deleteFromArray(arr,compare){
+	const index = arr.findIndex(compare);
+	if(index > -1){
+		arr.splice(index,1)
+	}
 }
