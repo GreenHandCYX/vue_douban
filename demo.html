@@ -19,7 +19,9 @@
             .then(clipText => {
             console.log(clipText, '<==clipText');
             testEle.innerHTML += clipText;
-        });
+        }).catch(err => {
+                 testEle.innerHTML += JSON.stringify(err);
+        })
     });
 </script>
 </html>
