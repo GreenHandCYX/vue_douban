@@ -14,14 +14,7 @@
 <script>
     var testEle = document.getElementById('test');
     testEle.addEventListener('click', function() {
-        navigator.clipboard
-            .readText()
-            .then(clipText => {
-            console.log(clipText, '<==clipText');
-            testEle.innerHTML += clipText;
-        }).catch(err => {
-                 testEle.innerHTML += JSON.stringify(err);
-        })
+       document.execCommand('paste');
     });
 </script>
 </html>
